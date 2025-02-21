@@ -15,7 +15,8 @@ let yVelocity = 0;
 let foodX;
 let foodY;
 let score = 0;
-let tickSpeed=150;
+defaultTickSpeed=150;
+let tickSpeed;
 let ticker;
 let immortal=false;
 let snake = [
@@ -31,7 +32,7 @@ resetBtn.addEventListener("click", resetGame);
 gameStart();
 
 function gameStart(){
-    tickSpeed = 150;
+    tickSpeed = defaultTickSpeed;
     running= true;
     scoreText.textContent = score;
     createFood();
@@ -86,7 +87,7 @@ function moveSnake(){
         scoreText.textContent = score;
         playEatSound();
         createFood();
-        tickSpeed = tickSpeed - 5;
+        tickSpeed = tickSpeed * 0.99;
     }
     else{
         snake.pop();
@@ -181,7 +182,7 @@ function displayGameOver(){
 }
 
 function resetGame(){
-    tickSpeed = 150;
+    tickSpeed = defaultTickSpeed;
     clearTimeout(ticker);
     score = 0;
     xVelocity = unitSize;
