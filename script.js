@@ -30,6 +30,7 @@ resetBtn.addEventListener("click", resetGame);
 gameStart();
 
 function gameStart(){
+    tickSpeed = 150;
     running= true;
     scoreText.textContent = score;
     createFood();
