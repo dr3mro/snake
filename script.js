@@ -104,31 +104,38 @@ function changeDirection(event){
     const UP = 38;
     const RIGHT = 39;
     const DOWN = 40;
-
+    
+    // Adding WASD keys
+    const KEY_W = 87;
+    const KEY_A = 65;
+    const KEY_S = 83;
+    const KEY_D = 68;
+    console.log(keyPressed);
     const goingUp = (yVelocity == -unitSize);
     const goingDown = (yVelocity == unitSize);
     const goingRight = (xVelocity == unitSize);
     const goingLeft = (xVelocity == -unitSize);
 
     switch(true){
-        case(keyPressed == LEFT && !goingRight):
+        case((keyPressed == LEFT || keyPressed == KEY_A) && !goingRight):
             xVelocity = -unitSize;
             yVelocity = 0;
             break;
-        case(keyPressed == UP && !goingDown):
+        case((keyPressed == UP || keyPressed == KEY_W) && !goingDown):
             xVelocity = 0;
             yVelocity = -unitSize;
             break;
-        case(keyPressed == RIGHT && !goingLeft):
+        case((keyPressed == RIGHT || keyPressed == KEY_D) && !goingLeft):
             xVelocity = unitSize;
             yVelocity = 0;
             break;
-        case(keyPressed == DOWN && !goingUp):
+        case((keyPressed == DOWN || keyPressed == KEY_S) && !goingUp):
             xVelocity = 0;
             yVelocity = unitSize;
             break;
     }
 }
+
 
 function checkGameOver(){
     switch(true){
