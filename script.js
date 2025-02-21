@@ -2,6 +2,8 @@ const gameBoard = document.querySelector("#gameBoard");
 const ctx = gameBoard.getContext("2d");
 const scoreText = document.querySelector("#scoreText");
 const resetBtn = document.querySelector("#resetBtn");
+let audio = document.getElementById("bgMusic");
+
 const gameWidth = gameBoard.width;
 const gameHeight = gameBoard.height;
 const boardBackground = "darkslategray";
@@ -20,6 +22,7 @@ let tickSpeed;
 let ticker;
 let immortal=false;
 let paused=false;
+
 let snake = [
     {x:unitSize * 4, y:0},
     {x:unitSize * 3, y:0},
@@ -29,8 +32,6 @@ let snake = [
 ];
 
 document.getElementById("unmuteBtn").addEventListener("click", function() {
-    let audio = document.getElementById("bgMusic");
-
     if (audio.muted) {
         this.textContent = "🔊"; // Unmute icon
         audio.muted = false;
@@ -71,9 +72,10 @@ async function nextTick(){
                 drawFood();
                 moveSnake();
                 drawSnake();
-                checkGameOver(); 
+                checkGameOver();
             }
             checkPaused();
+            checkAudio(); 
             nextTick();
         }, tickSpeed);
     
@@ -83,6 +85,14 @@ async function nextTick(){
     }
 }
 
+function checkAudio(){
+    if(paused || !running || audio.muted){
+        audio.pause();
+    }
+    else{
+        audio.play();
+    }
+}
 function clearBoard(){
     ctx.fillStyle = boardBackground;
     ctx.fillRect(0, 0, gameWidth, gameHeight);
@@ -194,7 +204,7 @@ function changeDirection(event){
             paused = !paused;
             break;
     }
-    console.log(keyPressed);
+    //console.log(keyPressed);
 }
 
 function checkPaused(){
