@@ -17,6 +17,7 @@ let foodY;
 let score = 0;
 let tickSpeed=150;
 let ticker;
+let immortal=false;
 let snake = [
     {x:unitSize * 4, y:0},
     {x:unitSize * 3, y:0},
@@ -114,6 +115,9 @@ function changeDirection(event){
     const KEY_S = 83;
     const KEY_D = 68;
 
+    // Adding Z and X keys
+    const KEY_Z = 90;
+    const KEY_X = 88;
  
     const goingUp = (yVelocity == -unitSize);
     const goingDown = (yVelocity == unitSize);
@@ -137,9 +141,11 @@ function changeDirection(event){
             xVelocity = 0;
             yVelocity = unitSize;
             break;
-        case (keyPressed == 90):
+        case (keyPressed == KEY_Z):
             tickSpeed = 250;
             break;
+        case (keyPressed == KEY_X):
+            immortal = true;
     }
 }
 
@@ -161,7 +167,7 @@ function checkGameOver(){
     }
     for(let i = 1; i < snake.length; i+=1){
         if(snake[i].x == snake[0].x && snake[i].y == snake[0].y){
-            running = false;
+            running = immortal;
         }
     }
 }
