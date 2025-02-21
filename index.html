@@ -8,10 +8,13 @@
 </head>
 <body>
     <div id="gameContainer">
-        <audio id="bgMusic" src="music.mp3" loop autoplay></audio>
+        <audio id="bgMusic" src="music.mp3" autoplay muted loop></audio>
         <canvas id="gameBoard" width="500" height="500"></canvas>
         <div id="scoreText">0</div>
         <button id="resetBtn">Reset</button>
+        <button id="unmuteBtn">
+            <span id="muteIcon">🔇</span>
+        </button>
         <div id="touchControls" style="margin-top: 10%;">
             <button id="upBtn">▲</button>
             <div class="horizontal">

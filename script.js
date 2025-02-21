@@ -27,6 +27,19 @@ let snake = [
     {x:0, y:0}
 ];
 
+document.getElementById("unmuteBtn").addEventListener("click", function() {
+    let audio = document.getElementById("bgMusic");
+
+    if (audio.muted) {
+        this.textContent = "🔊"; // Unmute icon
+        audio.muted = false;
+        audio.play();
+    } else {
+        this.textContent = "🔇"; // Mute icon
+        audio.muted = true;
+        audio.pause();
+    }
+});
 
 window.addEventListener("keydown", changeDirection);
 resetBtn.addEventListener("click", resetGame);
