@@ -15,7 +15,7 @@ let yVelocity = 0;
 let foodX;
 let foodY;
 let score = 0;
-
+let tickSpeed=150;
 let snake = [
     {x:unitSize * 4, y:0},
     {x:unitSize * 3, y:0},
@@ -45,7 +45,7 @@ function nextTick(){
             drawSnake();
             checkGameOver();
             nextTick();
-        }, 75);
+        }, tickSpeed);
     }
     else{
         displayGameOver();
@@ -83,6 +83,7 @@ function moveSnake(){
         scoreText.textContent = score;
         playEatSound();
         createFood();
+        tickSpeed = tickSpeed - 5;
     }
     else{
         snake.pop();
@@ -179,6 +180,7 @@ function resetGame(){
         {x:0, y:0}
     ];
     gameStart();
+    tickSpeed = 150;
 }
 
 function playEatSound() {
