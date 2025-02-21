@@ -239,6 +239,7 @@ function displayGameOver(){
 
 function resetGame(){
     tickSpeed = defaultTickSpeed;
+    paused = false;
     clearTimeout(ticker);
     score = 0;
     xVelocity = unitSize;
