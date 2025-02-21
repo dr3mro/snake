@@ -22,7 +22,6 @@ let tickSpeed;
 let ticker;
 let immortal=false;
 let paused=false;
-let autoPaused=false;
 
 let snake = [
     {x:unitSize * 4, y:0},
@@ -33,17 +32,9 @@ let snake = [
 ];
 
 document.addEventListener("visibilitychange", () => {
-    if (document.hidden && running) {
-        if(!paused){
-            autoPaused = true;
-            paused = true;
-        }
-    } else {
-        if(autoPaused){
-            paused = false;
-            autoPaused = false;
-        }
-    }
+    if(document.hidden){
+        paused = true;
+    }  
 });
 
 document.getElementById("unmuteBtn").addEventListener("click", function() {
