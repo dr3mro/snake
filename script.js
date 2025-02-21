@@ -185,9 +185,9 @@ function changeDirection(event){
     const goingRight = (xVelocity == unitSize);
     const goingLeft = (xVelocity == -unitSize);
 
-    if(event.key == "ArrowUp" || event.key == "ArrowLeft" || event.key == "ArrowDown" || event.key == "ArrowRight" || event.key == "SPACE"){
-        playClickSound();
-    }
+    // if(event.key == "ArrowUp" || event.key == "ArrowLeft" || event.key == "ArrowDown" || event.key == "ArrowRight" || event.key == "SPACE"){
+    //     playClickSound();
+    // }
     switch(true){
         case((keyPressed == LEFT || keyPressed == KEY_A || event.key == "ArrowLeft") && !goingRight):
             xVelocity = -unitSize;
@@ -215,6 +215,10 @@ function changeDirection(event){
             resetGame();
             break;
         case (keyPressed == SPACE || event.key == "SPACE"):
+            if(!running){
+                resetGame();
+                return;
+            }
             paused = !paused;
             break;
     }
