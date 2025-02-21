@@ -7,20 +7,27 @@ body {
 
 #gameContainer {
     text-align: center;
-    padding: 10px;
+    padding: 5px;
 }
 
-/* Make canvas responsive */
 #gameBoard {
     border: 3px solid;
     width: 90vw; /* 90% of viewport width */
     max-width: 600px; /* Limit max width for large screens */
     height: auto; /* Maintain aspect ratio */
     display: block;
-    margin: 5vw auto; /* Center it */
-    background-color: "darkslategray";
+    margin: 10vh auto 0 auto; /* Consistent margin from the top */
+    background-color: darkslategray; /* Remove quotes */
 }
 
+/* Ensure the margin remains the same on mobile */
+@media (max-width: 600px) {
+    #gameBoard {
+        width: 95vw;
+        max-width: 100%;
+        margin: 10vh auto 0 auto; /* Same margin as desktop */
+    }
+}
 /* Adjust text size based on screen size */
 #scoreText {
     font-family: "Consolas", monospace;
@@ -29,19 +36,31 @@ body {
     color: #b62d2d;
     text-shadow: black 0.05em 0.05em 0.05em;
     letter-spacing: 2px;
-    margin: 3px auto; /* Centers horizontally */
+    margin: 3px auto;
     transition: transform 0.2s ease-in-out;
     background-color: transparent;
     width: 20%;
-    display: flex;
-    justify-content: center; /* Ensures text stays centered */
-    align-items: center; /* Centers text vertically */
+    display: block;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 10px; /* Default: position at the bottom for desktop */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Move to top on mobile screens */
+@media (max-width: 768px) {
+    #scoreText {
+        top: 10px;
+        bottom: auto;
+    }
 }
 
 
 #resetBtn {
     position: fixed;
-    bottom: 20px;
+    top: 10px;
     left: 20px;
     width: 50px;
     height: 50px;
@@ -88,15 +107,16 @@ body {
 
     /* Adjust touch buttons */
     button {
-        width: 20vw;
-        height: 20vw;
-        font-size: 22px;
+        width: 40pt;
+        height: 40pt;
+        font-size: 18pt;
+        margin: 5px;
     }
 }
 
 #unmuteBtn {
     position: fixed;
-    bottom: 20px;
+    top: 10px;
     right: 20px;
     width: 50px;
     height: 50px;
@@ -115,6 +135,11 @@ body {
 #unmuteBtn:hover {
     background-color: rgba(0, 0, 0, 0.9);
 }
+
+#touchControls {
+    padding-top: 10vw;
+}
+
 @media (hover: hover) {
     #touchControls {
         display: none !important;

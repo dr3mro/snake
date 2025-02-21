@@ -48,7 +48,7 @@ document.getElementById("upBtn").addEventListener("touchstart", () => touchMove(
 document.getElementById("downBtn").addEventListener("touchstart", () => touchMove("ArrowDown"));
 document.getElementById("leftBtn").addEventListener("touchstart", () => touchMove("ArrowLeft"));
 document.getElementById("rightBtn").addEventListener("touchstart", () => touchMove("ArrowRight"));
-document.getElementById("gameContainer").addEventListener("touchstart", () => touchMove("SPACE"));
+document.getElementById("gameBoard").addEventListener("touchstart", () => touchMove("SPACE"));
 
 
 gameStart();
