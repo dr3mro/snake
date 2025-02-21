@@ -114,7 +114,7 @@ function changeDirection(event){
     const KEY_S = 83;
     const KEY_D = 68;
 
-    console.log(keyPressed);
+ 
     const goingUp = (yVelocity == -unitSize);
     const goingDown = (yVelocity == unitSize);
     const goingRight = (xVelocity == unitSize);
@@ -138,7 +138,7 @@ function changeDirection(event){
             yVelocity = unitSize;
             break;
         case (keyPressed == 90):
-            tickSpeed = 150;
+            tickSpeed = 250;
             break;
     }
 }
