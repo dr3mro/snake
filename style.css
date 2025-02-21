@@ -140,3 +140,7 @@ body {
         font-size: 10vw;
     }
 }
+html, body {
+    overflow: hidden;
+    height: 100%;
+}
