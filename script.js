@@ -26,6 +26,11 @@ let snake = [
     {x:unitSize, y:0},
     {x:0, y:0}
 ];
+document.getElementById("upBtn").addEventListener("touchstart", () => changeDirection("ArrowUp"));
+document.getElementById("downBtn").addEventListener("touchstart", () => changeDirection("ArrowDown"));
+document.getElementById("leftBtn").addEventListener("touchstart", () => changeDirection("ArrowLeft"));
+document.getElementById("rightBtn").addEventListener("touchstart", () => changeDirection("ArrowRight"));
+
 
 window.addEventListener("keydown", changeDirection);
 resetBtn.addEventListener("click", resetGame);
