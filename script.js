@@ -81,6 +81,7 @@ function moveSnake(){
     if(snake[0].x == foodX && snake[0].y == foodY){
         score+=1;
         scoreText.textContent = score;
+        playEatSound();
         createFood();
     }
     else{
@@ -171,4 +172,9 @@ function resetGame(){
         {x:0, y:0}
     ];
     gameStart();
+}
+
+function playEatSound() {
+    const eatSound = new Audio("eat.mp3"); // Load the sound file
+    eatSound.play().catch(error => console.error("Playback error:", error));
 }
