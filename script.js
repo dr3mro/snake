@@ -3,7 +3,8 @@ const ctx = gameBoard.getContext("2d");
 const scoreText = document.querySelector("#scoreText");
 const resetBtn = document.querySelector("#resetBtn");
 let audio = document.getElementById("bgMusic");
-
+const clickSound = new Audio("click.wav"); // Load the sound file
+const eatSound = new Audio("eat.wav"); // Load the sound file
 const gameWidth = gameBoard.width;
 const gameHeight = gameBoard.height;
 const boardBackground = "darkslategray";
@@ -280,13 +281,12 @@ function resetGame(){
 }
 
 function playEatSound() {
-    const eatSound = new Audio("eat.wav"); // Load the sound file
+    
     eatSound.play().catch(error => console.error("Playback error:", error));
 }
 
 function playClickSound() {
-    const eatSound = new Audio("click.wav"); // Load the sound file
-    eatSound.play().catch(error => console.error("Playback error:", error));
+    clickSound.play().catch(error => console.error("Playback error:", error));
 }
 function touchMove(direction) {
     const event = new KeyboardEvent("keydown", { key: direction });
