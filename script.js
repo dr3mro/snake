@@ -220,7 +220,7 @@ function resetGame(){
 }
 
 function playEatSound() {
-    const eatSound = new Audio("eat.mp3"); // Load the sound file
+    const eatSound = new Audio("eat.wav"); // Load the sound file
     eatSound.play().catch(error => console.error("Playback error:", error));
 }
 

@@ -4,7 +4,7 @@
     <!-- Web App Meta Tags for iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Your App Name">
+    <meta name="apple-mobile-web-app-title" content="Snake">
     <link rel="manifest" href="/manifest.json">
 
     <!-- Add Touch Icon for iOS -->
@@ -17,9 +17,10 @@
 </head>
 <body>
     <div id="gameContainer">
+        <div id="scoreText">0</div>
         <audio id="bgMusic" src="music.mp3" autoplay muted loop></audio>
         <canvas id="gameBoard" width="500" height="500"></canvas>
-        <div id="scoreText">0</div>
+        
         
         <button id="unmuteBtn">
             <span id="muteIcon">🔇</span>
