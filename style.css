@@ -3,15 +3,20 @@
     padding: 10px;
 }
 
+/* Make canvas responsive */
 #gameBoard {
     border: 3px solid;
-    max-width: 100%;
-    height: auto;
+    width: 90vw; /* 90% of viewport width */
+    max-width: 600px; /* Limit max width for large screens */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 0 auto; /* Center it */
 }
 
+/* Adjust text size based on screen size */
 #scoreText {
     font-family: "Permanent Marker", cursive;
-    font-size: 8vw; /* Adjusts based on viewport width */
+    font-size: 8vw; /* Adjust based on viewport width */
     max-width: 100%;
     word-wrap: break-word;
 }
@@ -28,8 +33,13 @@
     cursor: pointer;
 }
 
-/* Mobile adjustments */
+/* Mobile-specific adjustments */
 @media (max-width: 600px) {
+    #gameBoard {
+        width: 95vw; /* Slightly larger on small screens */
+        max-width: 100%;
+    }
+
     #scoreText {
         font-size: 10vw;
     }
@@ -39,18 +49,11 @@
         width: 25vw;
         height: 12vw;
     }
-}
 
-
-button:active {
-    background-color: #bbb;
-}
-
-/* Adjust for smaller screens */
-@media (max-width: 600px) {
+    /* Adjust touch buttons */
     button {
-        width: 25%;
-        height: 25%;
-        font-size: 30px;
+        width: 20%;
+        height: 20%;
+        font-size: 24px;
     }
 }
