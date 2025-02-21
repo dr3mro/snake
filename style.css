@@ -1,3 +1,10 @@
+body {
+    background-image: url('grass.jpg'); /* Replace with your image */
+    background-size: 100px 100px; /* Adjust tile size */
+    background-repeat: repeat; /* Tile the image */
+}
+
+
 #gameContainer {
     text-align: center;
     padding: 10px;
@@ -11,18 +18,25 @@
     height: auto; /* Maintain aspect ratio */
     display: block;
     margin: 5vw auto; /* Center it */
+    background-color: "darkslategray";
 }
 
 /* Adjust text size based on screen size */
 #scoreText {
-    font-family: "consolas", monospace;
-    font-size: 10vw; 
+    font-family: "Consolas", monospace;
+    font-size: 5vw; 
     text-align: center;
     color: #ff000d;
     letter-spacing: 2px;
-    margin: 10px 0;
+    margin: 10px auto; /* Centers horizontally */
     transition: transform 0.2s ease-in-out;
+    background-color: black;
+    width: 20%;
+    display: flex;
+    justify-content: center; /* Ensures text stays centered */
+    align-items: center; /* Centers text vertically */
 }
+
 
 #resetBtn {
     position: fixed;

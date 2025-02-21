@@ -4,7 +4,7 @@ const scoreText = document.querySelector("#scoreText");
 const resetBtn = document.querySelector("#resetBtn");
 const gameWidth = gameBoard.width;
 const gameHeight = gameBoard.height;
-const boardBackground = "white";
+const boardBackground = "darkslategray";
 const snakeColor = "lightgreen";
 const snakeBorder = "black";
 const foodColor = "red";
@@ -19,6 +19,7 @@ defaultTickSpeed=150;
 let tickSpeed;
 let ticker;
 let immortal=false;
+let paused=false;
 let snake = [
     {x:unitSize * 4, y:0},
     {x:unitSize * 3, y:0},
@@ -47,6 +48,7 @@ document.getElementById("upBtn").addEventListener("touchstart", () => touchMove(
 document.getElementById("downBtn").addEventListener("touchstart", () => touchMove("ArrowDown"));
 document.getElementById("leftBtn").addEventListener("touchstart", () => touchMove("ArrowLeft"));
 document.getElementById("rightBtn").addEventListener("touchstart", () => touchMove("ArrowRight"));
+document.getElementById("pauseBtn").addEventListener("touchstart", () => touchMove("SPACE"));
 
 
 gameStart();
@@ -60,16 +62,21 @@ function gameStart(){
     nextTick();
 }
 
-function nextTick(){
+async function nextTick(){
     if(running){
+
         ticker = setTimeout(()=>{
-            clearBoard();
-            drawFood();
-            moveSnake();
-            drawSnake();
-            checkGameOver();
+            if(!paused){
+                clearBoard();
+                drawFood();
+                moveSnake();
+                drawSnake();
+                checkGameOver(); 
+            }
+            checkPaused();
             nextTick();
         }, tickSpeed);
+    
     }
     else{
         displayGameOver();
@@ -93,6 +100,15 @@ function createFood(){
 function drawFood(){
     ctx.fillStyle = foodColor;
     ctx.fillRect(foodX, foodY, unitSize, unitSize);
+}
+function drawBg(){
+    const img = new Image();
+    img.src = "grass.jpg";
+    img.onload = function() {
+        const pattern = ctx.createPattern(img, "repeat"); // "repeat", "repeat-x", "repeat-y", "no-repeat"
+        ctx.fillStyle = pattern;
+        ctx.fillRect(0, 0, gameBoard.width, gameBoard.height);
+    };
 }
 
 function moveSnake(){
@@ -140,7 +156,9 @@ function changeDirection(event){
     // Adding Z and X keys
     const KEY_Z = 90;
     const KEY_X = 88;
- 
+    const KEY_ENTER = 13;
+    const SPACE = 32;
+
     const goingUp = (yVelocity == -unitSize);
     const goingDown = (yVelocity == unitSize);
     const goingRight = (xVelocity == unitSize);
@@ -168,10 +186,27 @@ function changeDirection(event){
             break;
         case (keyPressed == KEY_X):
             immortal = true;
+            break;
+        case (keyPressed == KEY_ENTER):
+            resetGame();
+            break;
+        case (keyPressed == SPACE || event.key == "SPACE"):
+            paused = !paused;
+            break;
     }
+    console.log(keyPressed);
 }
 
-
+function checkPaused(){
+    if(paused && running){
+        ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+        ctx.fillRect(0, 0, gameWidth, gameHeight);
+        ctx.font = "50px MV Boli";
+        ctx.fillStyle = "white";
+        ctx.textAlign = "center";
+        ctx.fillText("PAUSED", gameWidth / 2, gameHeight / 2);
+    }
+}
 function checkGameOver(){
     switch(true){
         case (snake[0].x < 0):
