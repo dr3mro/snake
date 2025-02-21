@@ -31,6 +31,14 @@ let snake = [
     {x:0, y:0}
 ];
 
+document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+        paused = true;
+    } else {
+        paused = false;
+    }
+});
+
 document.getElementById("unmuteBtn").addEventListener("click", function() {
     if(!running || paused){
         return;
