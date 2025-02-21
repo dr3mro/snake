@@ -110,7 +110,7 @@ function changeDirection(event){
     const KEY_A = 65;
     const KEY_S = 83;
     const KEY_D = 68;
-    console.log(keyPressed);
+
     const goingUp = (yVelocity == -unitSize);
     const goingDown = (yVelocity == unitSize);
     const goingRight = (xVelocity == unitSize);
