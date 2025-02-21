@@ -32,6 +32,9 @@ let snake = [
 ];
 
 document.getElementById("unmuteBtn").addEventListener("click", function() {
+    if(!running || paused){
+        return;
+    }
     if (audio.muted) {
         this.textContent = "🔊"; // Unmute icon
         audio.muted = false;
