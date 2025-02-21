@@ -107,10 +107,10 @@ body {
 
     /* Adjust touch buttons */
     button {
-        width: 40pt;
-        height: 40pt;
-        font-size: 18pt;
-        margin: 5px;
+        width: 20vw;
+        height: 20vw;
+        font-size: 22pt;
+        margin: 5pt;
     }
 }
 
