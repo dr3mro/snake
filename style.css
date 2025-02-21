@@ -29,14 +29,13 @@ body {
     color: #b62d2d;
     text-shadow: black 0.05em 0.05em 0.05em;
     letter-spacing: 2px;
-    margin: 10px auto; /* Centers horizontally */
+    margin: 3px auto; /* Centers horizontally */
     transition: transform 0.2s ease-in-out;
     background-color: transparent;
     width: 20%;
     display: flex;
     justify-content: center; /* Ensures text stays centered */
     align-items: center; /* Centers text vertically */
-    border-radius: 10px;
 }
 
 
@@ -89,9 +88,9 @@ body {
 
     /* Adjust touch buttons */
     button {
-        width: 22vw;
-        height: 22vw;
-        font-size: 25px;
+        width: 20vw;
+        height: 20vw;
+        font-size: 22px;
     }
 }
 
