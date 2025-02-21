@@ -26,14 +26,16 @@ let snake = [
     {x:unitSize, y:0},
     {x:0, y:0}
 ];
-document.getElementById("upBtn").addEventListener("touchstart", () => changeDirection("ArrowUp"));
-document.getElementById("downBtn").addEventListener("touchstart", () => changeDirection("ArrowDown"));
-document.getElementById("leftBtn").addEventListener("touchstart", () => changeDirection("ArrowLeft"));
-document.getElementById("rightBtn").addEventListener("touchstart", () => changeDirection("ArrowRight"));
 
 
 window.addEventListener("keydown", changeDirection);
 resetBtn.addEventListener("click", resetGame);
+document.getElementById("upBtn").addEventListener("touchstart", () => touchMove("ArrowUp"));
+document.getElementById("downBtn").addEventListener("touchstart", () => touchMove("ArrowDown"));
+document.getElementById("leftBtn").addEventListener("touchstart", () => touchMove("ArrowLeft"));
+document.getElementById("rightBtn").addEventListener("touchstart", () => touchMove("ArrowRight"));
+
+
 gameStart();
 
 function gameStart(){
@@ -110,6 +112,7 @@ function drawSnake(){
 
 function changeDirection(event){
     const keyPressed = event.keyCode;
+    //console.log(event.key);
     const LEFT = 37;
     const UP = 38;
     const RIGHT = 39;
@@ -131,19 +134,19 @@ function changeDirection(event){
     const goingLeft = (xVelocity == -unitSize);
 
     switch(true){
-        case((keyPressed == LEFT || keyPressed == KEY_A) && !goingRight):
+        case((keyPressed == LEFT || keyPressed == KEY_A || event.key == "ArrowLeft") && !goingRight):
             xVelocity = -unitSize;
             yVelocity = 0;
             break;
-        case((keyPressed == UP || keyPressed == KEY_W) && !goingDown):
+        case((keyPressed == UP || keyPressed == KEY_W || event.key == "ArrowUp") && !goingDown):
             xVelocity = 0;
             yVelocity = -unitSize;
             break;
-        case((keyPressed == RIGHT || keyPressed == KEY_D) && !goingLeft):
+        case((keyPressed == RIGHT || keyPressed == KEY_D || event.key == "ArrowRight") && !goingLeft):
             xVelocity = unitSize;
             yVelocity = 0;
             break;
-        case((keyPressed == DOWN || keyPressed == KEY_S) && !goingUp):
+        case((keyPressed == DOWN || keyPressed == KEY_S || event.key == "ArrowDown") && !goingUp):
             xVelocity = 0;
             yVelocity = unitSize;
             break;
@@ -206,4 +209,10 @@ function resetGame(){
 function playEatSound() {
     const eatSound = new Audio("eat.mp3"); // Load the sound file
     eatSound.play().catch(error => console.error("Playback error:", error));
+}
+
+function touchMove(direction) {
+    const event = new KeyboardEvent("keydown", { key: direction });
+    //console.log(event);
+    window.dispatchEvent(event);
 }
