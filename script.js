@@ -87,7 +87,7 @@ function moveSnake(){
         scoreText.textContent = score;
         playEatSound();
         createFood();
-        tickSpeed = tickSpeed * 0.99;
+        tickSpeed = tickSpeed - 2;
     }
     else{
         snake.pop();
