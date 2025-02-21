@@ -38,6 +38,7 @@ document.addEventListener("visibilitychange", () => {
 });
 
 document.getElementById("unmuteBtn").addEventListener("click", function() {
+    playClickSound();
     if(!running || paused){
         return;
     }
@@ -183,6 +184,9 @@ function changeDirection(event){
     const goingRight = (xVelocity == unitSize);
     const goingLeft = (xVelocity == -unitSize);
 
+    if(event.key == "ArrowUp" || event.key == "ArrowLeft" || event.key == "ArrowDown" || event.key == "ArrowRight" || event.key == "SPACE"){
+        playClickSound();
+    }
     switch(true){
         case((keyPressed == LEFT || keyPressed == KEY_A || event.key == "ArrowLeft") && !goingRight):
             xVelocity = -unitSize;
@@ -257,6 +261,7 @@ function displayGameOver(){
 }
 
 function resetGame(){
+    playClickSound();
     tickSpeed = defaultTickSpeed;
     paused = false;
     clearTimeout(ticker);
@@ -279,6 +284,10 @@ function playEatSound() {
     eatSound.play().catch(error => console.error("Playback error:", error));
 }
 
+function playClickSound() {
+    const eatSound = new Audio("click.wav"); // Load the sound file
+    eatSound.play().catch(error => console.error("Playback error:", error));
+}
 function touchMove(direction) {
     const event = new KeyboardEvent("keydown", { key: direction });
     //console.log(event);
