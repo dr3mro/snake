@@ -133,16 +133,16 @@ function changeDirection(event){
 function checkGameOver(){
     switch(true){
         case (snake[0].x < 0):
-            running = false;
+            snake[0].x = gameWidth;
             break;
         case (snake[0].x >= gameWidth):
-            running = false;
+            snake[0].x = 0;
             break;
         case (snake[0].y < 0):
-            running = false;
+            snake[0].y = gameHeight;
             break;
         case (snake[0].y >= gameHeight):
-            running = false;
+            snake[0].y = 0;
             break;
     }
     for(let i = 1; i < snake.length; i+=1){
