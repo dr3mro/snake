@@ -23,7 +23,7 @@ let tickSpeed;
 let ticker;
 let immortal=false;
 let paused=false;
-
+let pausedTextIsVisible=false;
 let snake = [
     {x:unitSize * 4, y:0},
     {x:unitSize * 3, y:0},
@@ -217,6 +217,7 @@ function changeDirection(event){
                 return;
             }
             playClickSound();
+            pausedTextIsVisible = false;
             paused = !paused;
             break;
     }
@@ -224,13 +225,14 @@ function changeDirection(event){
 }
 
 function checkPaused(){
-    if(paused && running){
-        ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+    if(paused && running && !pausedTextIsVisible){
+        ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
         ctx.fillRect(0, 0, gameWidth, gameHeight);
         ctx.font = "50px MV Boli";
         ctx.fillStyle = "white";
         ctx.textAlign = "center";
         ctx.fillText("PAUSED", gameWidth / 2, gameHeight / 2);
+        pausedTextIsVisible = true;
     }
 }
 function checkGameOver(){
@@ -295,3 +297,4 @@ function touchMove(direction) {
     //console.log(event);
     window.dispatchEvent(event);
 }
+
