@@ -21,7 +21,7 @@ let score = 0;
 defaultTickSpeed=150;
 let tickSpeed;
 let ticker;
-let immortal=false;
+
 let paused=false;
 let pausedTextIsVisible=false;
 const LEFT = 37;
@@ -97,9 +97,7 @@ async function nextTick(){
             if(!paused){
                 clearBoard();
                 drawFood();
-                moveSnake();
-                drawSnake();
-                checkGameOver();
+                moveDrawCheck();
             }
             checkPaused();
             checkAudio(); 
@@ -176,30 +174,40 @@ function drawSnake(){
     })
 }
 
+function moveDrawCheck(){
+    moveSnake();
+    drawSnake();
+    checkGameOver();
+}
 function changeDirection(event){
     const keyPressed = event.keyCode;
     //console.log(event.key);
-    const goingUp = (yVelocity == -unitSize);
-    const goingDown = (yVelocity == unitSize);
-    const goingRight = (xVelocity == unitSize);
-    const goingLeft = (xVelocity == -unitSize);
+    const goingUp = (yVelocity == -unitSize && xVelocity == 0);
+    const goingDown = (yVelocity == unitSize && xVelocity == 0);
+    const goingRight = (xVelocity == unitSize && yVelocity == 0);
+    const goingLeft = (xVelocity == -unitSize && yVelocity == 0);
+
 
     switch(true){
         case(!goingRight && (keyPressed == LEFT || keyPressed == KEY_A || event.key == "ArrowLeft")):
             xVelocity = -unitSize;
             yVelocity = 0;
+            moveDrawCheck();
             break;
         case(!goingDown && (keyPressed == UP || keyPressed == KEY_W || event.key == "ArrowUp")):
             xVelocity = 0;
             yVelocity = -unitSize;
+            moveDrawCheck();
             break;
         case(!goingLeft &&(keyPressed == RIGHT || keyPressed == KEY_D || event.key == "ArrowRight")):
             xVelocity = unitSize;
             yVelocity = 0;
+            moveDrawCheck();
             break;
         case(!goingUp && (keyPressed == DOWN || keyPressed == KEY_S || event.key == "ArrowDown")):
             xVelocity = 0;
             yVelocity = unitSize;
+            moveDrawCheck();
             break;
         // case (keyPressed == KEY_Z):
         //     tickSpeed = 250;
@@ -253,7 +261,7 @@ function checkGameOver(){
     }
     for(let i = 1; i < snake.length; i+=1){
         if(snake[i].x == snake[0].x && snake[i].y == snake[0].y){
-            running = immortal;
+            running = false;
         }
     }
 }
@@ -296,6 +304,6 @@ function playClickSound() {
 function touchMove(direction) {
     const event = new KeyboardEvent("keydown", { key: direction });
     //console.log(event);
-    window.dispatchEvent(event);
+    document.dispatchEvent(event);
 }
 
