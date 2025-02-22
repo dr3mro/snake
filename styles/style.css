@@ -1,9 +1,8 @@
 body {
-    background-image: url('grass.jpg'); /* Replace with your image */
-    background-size: 100px 100px; /* Adjust tile size */
-    background-repeat: repeat; /* Tile the image */
+    background-image: url('../assets/images/grass.png');
+    background-size: 100px 100px; 
+    background-repeat: repeat; 
 }
-
 
 #gameContainer {
     text-align: center;

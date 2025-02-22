@@ -8,20 +8,18 @@
     <link rel="manifest" href="manifest.json">
 
     <!-- Add Touch Icon for iOS -->
-    <link rel="apple-touch-icon" href="snake192.png">
+    <link rel="apple-touch-icon" href="assets/images/snake192.png">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
     <div id="gameContainer">
         <div id="scoreText">0</div>
-        <audio id="bgMusic" src="music.mp3" autoplay muted loop></audio>
+        <audio id="bgMusic" src="assets/audio/music.mp3" autoplay muted loop></audio>
         <canvas id="gameBoard" width="500" height="500"></canvas>
-        
-        
         <button id="unmuteBtn">
             <span id="muteIcon">🔇</span>
         </button>
@@ -32,11 +30,9 @@
                 <button id="downBtn">▼</button>
                 <button id="rightBtn">▶</button>
             </div>
-            
         </div>
         <button id="resetBtn">🚀</button>
-        
     </div>
-    <script src="script.js"></script>
+    <script type="module" src="scripts/script.js"></script>
 </body>
 </html>
