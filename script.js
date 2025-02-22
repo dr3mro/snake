@@ -18,7 +18,7 @@ let yVelocity = 0;
 let foodX;
 let foodY;
 let score = 0;
-defaultTickSpeed=150;
+defaultTickSpeed=75;
 let tickSpeed;
 let ticker;
 let immortal=false;
@@ -144,7 +144,7 @@ function moveSnake(){
         scoreText.textContent = score;
         playEatSound();
         createFood();
-        tickSpeed = tickSpeed - 2;
+        tickSpeed = tickSpeed - 1;
     }
     else{
         snake.pop();
