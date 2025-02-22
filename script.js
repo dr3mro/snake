@@ -219,6 +219,8 @@ function changeDirection(event){
             pausedTextIsVisible = false;
             paused = !paused;
             break;
+        default:
+            break;
     }
     //console.log(keyPressed);
 }
