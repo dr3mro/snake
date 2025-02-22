@@ -304,6 +304,6 @@ function playClickSound() {
 function touchMove(direction) {
     const event = new KeyboardEvent("keydown", { key: direction });
     //console.log(event);
-    document.dispatchEvent(event);
+    window.dispatchEvent(event);
 }
 
