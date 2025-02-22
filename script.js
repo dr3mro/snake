@@ -18,7 +18,7 @@ let yVelocity = 0;
 let foodX;
 let foodY;
 let score = 0;
-defaultTickSpeed=75;
+defaultTickSpeed=150;
 let tickSpeed;
 let ticker;
 let immortal=false;
