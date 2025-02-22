@@ -24,6 +24,22 @@ let ticker;
 let immortal=false;
 let paused=false;
 let pausedTextIsVisible=false;
+const LEFT = 37;
+const UP = 38;
+const RIGHT = 39;
+const DOWN = 40;
+
+// Adding WASD keys
+const KEY_W = 87;
+const KEY_A = 65;
+const KEY_S = 83;
+const KEY_D = 68;
+
+// Adding Z and X keys
+const KEY_Z = 90;
+const KEY_X = 88;
+const KEY_ENTER = 13;
+const SPACE = 32;
 let snake = [
     {x:unitSize * 4, y:0},
     {x:unitSize * 3, y:0},
@@ -163,51 +179,34 @@ function drawSnake(){
 function changeDirection(event){
     const keyPressed = event.keyCode;
     //console.log(event.key);
-    const LEFT = 37;
-    const UP = 38;
-    const RIGHT = 39;
-    const DOWN = 40;
-    
-    // Adding WASD keys
-    const KEY_W = 87;
-    const KEY_A = 65;
-    const KEY_S = 83;
-    const KEY_D = 68;
-
-    // Adding Z and X keys
-    const KEY_Z = 90;
-    const KEY_X = 88;
-    const KEY_ENTER = 13;
-    const SPACE = 32;
-
     const goingUp = (yVelocity == -unitSize);
     const goingDown = (yVelocity == unitSize);
     const goingRight = (xVelocity == unitSize);
     const goingLeft = (xVelocity == -unitSize);
 
     switch(true){
-        case((keyPressed == LEFT || keyPressed == KEY_A || event.key == "ArrowLeft") && !goingRight):
+        case(!goingRight && (keyPressed == LEFT || keyPressed == KEY_A || event.key == "ArrowLeft")):
             xVelocity = -unitSize;
             yVelocity = 0;
             break;
-        case((keyPressed == UP || keyPressed == KEY_W || event.key == "ArrowUp") && !goingDown):
+        case(!goingDown && (keyPressed == UP || keyPressed == KEY_W || event.key == "ArrowUp")):
             xVelocity = 0;
             yVelocity = -unitSize;
             break;
-        case((keyPressed == RIGHT || keyPressed == KEY_D || event.key == "ArrowRight") && !goingLeft):
+        case(!goingLeft &&(keyPressed == RIGHT || keyPressed == KEY_D || event.key == "ArrowRight")):
             xVelocity = unitSize;
             yVelocity = 0;
             break;
-        case((keyPressed == DOWN || keyPressed == KEY_S || event.key == "ArrowDown") && !goingUp):
+        case(!goingUp && (keyPressed == DOWN || keyPressed == KEY_S || event.key == "ArrowDown")):
             xVelocity = 0;
             yVelocity = unitSize;
             break;
-        case (keyPressed == KEY_Z):
-            tickSpeed = 250;
-            break;
-        case (keyPressed == KEY_X):
-            immortal = true;
-            break;
+        // case (keyPressed == KEY_Z):
+        //     tickSpeed = 250;
+        //     break;
+        // case (keyPressed == KEY_X):
+        //     immortal = true;
+        //     break;
         case (keyPressed == KEY_ENTER):
             resetGame();
             break;
