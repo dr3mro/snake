@@ -94,11 +94,18 @@ function clearBoard(){
 
 function createFood(){
     function randomFood(min, max){
-        const randNum = Math.round((Math.random() * (max - min) + min) / Game.UNITSIZE) * Game.UNITSIZE;
-        return randNum;
+        return Math.round((Math.random() * (max - min) + min) / Game.UNITSIZE) * Game.UNITSIZE;
     }
-    foodX = randomFood(0, Game.GAMEWIDTH - Game.UNITSIZE);
-    foodY = randomFood(0, Game.GAMEWIDTH - Game.UNITSIZE);
+
+    let validPosition = false;
+
+    while (!validPosition) {
+        foodX = randomFood(0, Game.GAMEWIDTH - Game.UNITSIZE);
+        foodY = randomFood(0, Game.GAMEHEIGHT - Game.UNITSIZE);
+
+        // Check if the food position overlaps with the snake's body
+        validPosition = !snake.some(segment => segment.x === foodX && segment.y === foodY);
+    }
 }
 
 function drawFood(){
