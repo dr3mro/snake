@@ -108,10 +108,14 @@ function createFood(){
     }
 }
 
+// Add more colors to the array for random food colors
 function drawFood(){
-    Elements.CTX.fillStyle = "#32CD32"; // Lime green for food
+    const colors = ["#32CD32", "#FF4500", "#FFD700", "#1E90FF", "#8A2BE2", "#FF69B4", "#00CED1", "#FFA500", "#7FFF00", "#DC143C"]; // Expanded array of random colors
+    const randomColor = colors[Math.floor(Math.random() * colors.length)]; // Pick a random color
+
+    Elements.CTX.fillStyle = randomColor; // Set the random color for food
     Elements.CTX.shadowBlur = 10; // Glow effect
-    Elements.CTX.shadowColor = "#32CD32";
+    Elements.CTX.shadowColor = randomColor;
     Elements.CTX.fillRect(foodX, foodY, Game.UNITSIZE, Game.UNITSIZE);
     Elements.CTX.shadowBlur = 0; // Reset shadow
 }
