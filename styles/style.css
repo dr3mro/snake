@@ -1,7 +1,12 @@
+/* Modernize the game visuals */
 body {
-    background-image: url('../assets/images/grass.png');
-    background-size: 100px 100px; 
-    background-repeat: repeat; 
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298); /* Gradient background */
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 #gameContainer {
@@ -10,13 +15,14 @@ body {
 }
 
 #gameBoard {
-    border: 3px solid;
+    background: #000; /* Black background for contrast */
+    border: 5px solid #FFD700; /* Gold border */
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); /* Glow effect */
+    margin: 20px auto;
+    display: block;
     width: 90vw; /* 90% of viewport width */
     max-width: 600px; /* Limit max width for large screens */
     height: auto; /* Maintain aspect ratio */
-    display: block;
-    margin: 10vh auto 0 auto; /* Consistent margin from the top */
-    background-color: darkslategray; /* Remove quotes */
 }
 
 /* Ensure the margin remains the same on mobile */
@@ -27,6 +33,7 @@ body {
         margin: 10vh auto 0 auto; /* Same margin as desktop */
     }
 }
+
 /* Adjust text size based on screen size */
 #scoreText {
     font-family: "Consolas", monospace;
@@ -54,8 +61,17 @@ body {
         top: 10px;
         bottom: auto;
     }
-}
 
+    #gameBoard {
+        width: 90%;
+        height: auto;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+}
 
 #resetBtn {
     position: fixed;
@@ -163,7 +179,37 @@ body {
         font-size: 10vw;
     }
 }
+
 html, body {
     overflow: hidden;
     height: 100%;
+}
+
+button {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #32CD32, #228B22); /* Green gradient */
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+button:hover {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, #228B22, #006400); /* Darker green on hover */
+}
+
+button:active {
+    transform: scale(1.05);
+}
+
+#score {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px;
+    color: #FFD700; /* Gold color */
 }

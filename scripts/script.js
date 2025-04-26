@@ -109,8 +109,11 @@ function createFood(){
 }
 
 function drawFood(){
-    Elements.CTX.fillStyle = Game.FOODCOLOR;
+    Elements.CTX.fillStyle = "#32CD32"; // Lime green for food
+    Elements.CTX.shadowBlur = 10; // Glow effect
+    Elements.CTX.shadowColor = "#32CD32";
     Elements.CTX.fillRect(foodX, foodY, Game.UNITSIZE, Game.UNITSIZE);
+    Elements.CTX.shadowBlur = 0; // Reset shadow
 }
 
 function moveSnake(){
@@ -133,12 +136,15 @@ function moveSnake(){
 }
 
 function drawSnake(){
-    Elements.CTX.fillStyle = Game.SNAKECOLOR;
-    Elements.CTX.strokeStyle = Game.SNAKEBORDER;
+    Elements.CTX.fillStyle = "#1E90FF"; // Dodger blue for snake
+    Elements.CTX.strokeStyle = "#00008B"; // Dark blue border
+    Elements.CTX.shadowBlur = 10; // Glow effect
+    Elements.CTX.shadowColor = "#1E90FF";
     snake.forEach(snakePart => {
         Elements.CTX.fillRect(snakePart.x, snakePart.y, Game.UNITSIZE, Game.UNITSIZE);
         Elements.CTX.strokeRect(snakePart.x, snakePart.y, Game.UNITSIZE, Game.UNITSIZE);
-    })
+    });
+    Elements.CTX.shadowBlur = 0; // Reset shadow
 }
 
 function moveDrawCheck(){
@@ -147,7 +153,7 @@ function moveDrawCheck(){
     checkGameOver();
 }
 function changeDirection(event){
-    if (!running || (paused && event.keyCode != Game.SPACE) ) return; // Prevent direction change if the game is not running
+    if ( ( !running && event.keyCode != Game.KEY_ENTER )|| (paused && event.keyCode != Game.SPACE) ) return; // Prevent direction change if the game is not running
 
     const keyPressed = event.keyCode;
     //console.log(event.key);
@@ -198,10 +204,10 @@ function changeDirection(event){
 
 function checkPaused(){
     if(paused && running && !pausedTextIsVisible){
-        Elements.CTX.fillStyle = "rgba(0, 0, 0, 0.5)";
+        Elements.CTX.fillStyle = "rgba(0, 0, 0, 0.7)"; // Darker overlay
         Elements.CTX.fillRect(0, 0, Game.GAMEWIDTH, Game.GAMEHEIGHT);
-        Elements.CTX.font = "50px MV Boli";
-        Elements.CTX.fillStyle = "white";
+        Elements.CTX.font = "bold 60px 'Poppins', sans-serif"; // Modern font
+        Elements.CTX.fillStyle = "#FFD700"; // Gold color for text
         Elements.CTX.textAlign = "center";
         Elements.CTX.fillText("PAUSED", Game.GAMEWIDTH / 2, Game.GAMEHEIGHT / 2);
         pausedTextIsVisible = true;
@@ -230,8 +236,8 @@ function checkGameOver(){
 }
 
 function displayGameOver(){
-    Elements.CTX.font = "50px MV Boli";
-    Elements.CTX.fillStyle = "black";
+    Elements.CTX.font = "bold 60px 'Poppins', sans-serif"; // Modern font
+    Elements.CTX.fillStyle = "#FF4500"; // Bright red for game over
     Elements.CTX.textAlign = "center";
     Elements.CTX.fillText("GAME OVER!", Game.GAMEWIDTH / 2, Game.GAMEHEIGHT / 2);
     running = false;
