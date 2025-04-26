@@ -140,6 +140,8 @@ function moveDrawCheck(){
     checkGameOver();
 }
 function changeDirection(event){
+    if (!running) return; // Prevent direction change if the game is not running
+
     const keyPressed = event.keyCode;
     //console.log(event.key);
     const goingUp = (yVelocity == -Game.UNITSIZE && xVelocity == 0);
