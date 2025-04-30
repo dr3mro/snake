@@ -65,8 +65,6 @@ document.getElementById("leftBtn").addEventListener("touchstart", () => touchMov
 document.getElementById("rightBtn").addEventListener("touchstart", () => touchMove("ArrowRight"));
 document.getElementById("gameBoard").addEventListener("touchstart", () => touchMove("SPACE"));
 
-document.getElementById("resetBtn").addEventListener("click", resetGame);
-
 gameStart();
 
 function gameStart(){
