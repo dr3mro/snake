@@ -23,6 +23,9 @@ let snake = [
     {x:0, y:0}
 ];
 
+// Store the current food color globally
+let currentFoodColor = "#32CD32"; // Default color
+
 document.addEventListener("visibilitychange", () => {
     if(document.hidden){
         paused = true;
@@ -106,16 +109,16 @@ function createFood(){
         // Check if the food position overlaps with the snake's body
         validPosition = !snake.some(segment => segment.x === foodX && segment.y === foodY);
     }
+
+    // Change the food color only when new food is created
+    const colors = ["#32CD32", "#FF4500", "#FFD700", "#1E90FF", "#8A2BE2", "#FF69B4", "#00CED1", "#FFA500", "#7FFF00", "#DC143C"];
+    currentFoodColor = colors[Math.floor(Math.random() * colors.length)];
 }
 
-// Add more colors to the array for random food colors
 function drawFood(){
-    const colors = ["#32CD32", "#FF4500", "#FFD700", "#1E90FF", "#8A2BE2", "#FF69B4", "#00CED1", "#FFA500", "#7FFF00", "#DC143C"]; // Expanded array of random colors
-    const randomColor = colors[Math.floor(Math.random() * colors.length)]; // Pick a random color
-
-    Elements.CTX.fillStyle = randomColor; // Set the random color for food
+    Elements.CTX.fillStyle = currentFoodColor; // Use the current food color
     Elements.CTX.shadowBlur = 10; // Glow effect
-    Elements.CTX.shadowColor = randomColor;
+    Elements.CTX.shadowColor = currentFoodColor;
     Elements.CTX.fillRect(foodX, foodY, Game.UNITSIZE, Game.UNITSIZE);
     Elements.CTX.shadowBlur = 0; // Reset shadow
 }
