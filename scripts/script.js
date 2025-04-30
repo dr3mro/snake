@@ -176,29 +176,34 @@ function drawSpecialFood() {
     }
 }
 
-function moveSnake(){
+function moveSnake() {
     const head = {
         x: snake[0].x + xVelocity,
         y: snake[0].y + yVelocity
     };
     snake.unshift(head);
-    //if food is eaten
-    if(snake[0].x == foodX && snake[0].y == foodY){
-        score+=1;
+
+    // Check if regular food is eaten
+    if (snake[0].x == foodX && snake[0].y == foodY) {
+        score += 1;
         scoreText.textContent = score;
         Audio.playEatSound();
         createFood();
         tickSpeed = tickSpeed - 1;
     } else if (specialFoodActive && snake[0].x == specialFoodX && snake[0].y == specialFoodY) {
         // Check if special food is eaten
-        lives += 1; // Add a life
-        drawLives(); // Update lives display
-        Audio.playEatSound();
+        if (lives < 7) { // Ensure lives do not exceed 7
+            lives += 1; // Add a life
+            drawLives(); // Update lives display
+        }
+        score += 5; // Increase score by 5 for special food
+        scoreText.textContent = score;
+        Audio.playEatSound(); // Play eat sound for special food
         specialFoodActive = false; // Deactivate special food
         clearTimeout(specialFoodTimer); // Clear the timer
     } else {
         snake.pop();
-    }     
+    }
 }
 
 function drawSnake(){
