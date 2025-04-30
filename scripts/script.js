@@ -175,8 +175,6 @@ function drawSpecialFood() {
 }
 
 function moveSnake() {
-    if (paused) return;
-    
     const head = {
         x: snake[0].x + xVelocity,
         y: snake[0].y + yVelocity
@@ -219,9 +217,14 @@ function drawSnake(){
 }
 
 function moveDrawCheck(){
-    moveSnake();
-    drawSnake();
-    checkGameOver();
+    const movable = !paused && running;
+    
+    if ( movable ) {
+        moveSnake();
+        drawSnake();
+        checkGameOver();
+    }
+    
 }
 function changeDirection(event){
 
@@ -231,26 +234,24 @@ function changeDirection(event){
     const goingDown = (yVelocity == Game.UNITSIZE && xVelocity == 0);
     const goingRight = (xVelocity == Game.UNITSIZE && yVelocity == 0);
     const goingLeft = (xVelocity == -Game.UNITSIZE && yVelocity == 0);
-    
-    const movable = !paused && running;
 
     switch(true){
-        case(!goingRight && movable && (keyPressed == Game.LEFT || keyPressed == Game.KEY_A || event.key == "ArrowLeft")):
+        case(!goingRight && (keyPressed == Game.LEFT || keyPressed == Game.KEY_A || event.key == "ArrowLeft")):
             xVelocity = -Game.UNITSIZE;
             yVelocity = 0;
             moveDrawCheck();
             break;
-        case(!goingDown && movable && (keyPressed == Game.UP || keyPressed == Game.KEY_W || event.key == "ArrowUp")):
+        case(!goingDown  && (keyPressed == Game.UP || keyPressed == Game.KEY_W || event.key == "ArrowUp")):
             xVelocity = 0;
             yVelocity = -Game.UNITSIZE;
             moveDrawCheck();
             break;
-        case(!goingLeft && movable &&(keyPressed ==  Game.RIGHT || keyPressed == Game.KEY_D || event.key == "ArrowRight")):
+        case(!goingLeft && (keyPressed ==  Game.RIGHT || keyPressed == Game.KEY_D || event.key == "ArrowRight")):
             xVelocity = Game.UNITSIZE;
             yVelocity = 0;
             moveDrawCheck();
             break;
-        case(!goingUp && movable && (keyPressed == Game.DOWN || keyPressed == Game.KEY_S || event.key == "ArrowDown")):
+        case(!goingUp  && (keyPressed == Game.DOWN || keyPressed == Game.KEY_S || event.key == "ArrowDown")):
             xVelocity = 0;
             yVelocity = Game.UNITSIZE;
             moveDrawCheck();
@@ -287,8 +288,6 @@ function checkPaused() {
 }
 
 function checkGameOver() {
-    if(paused) return;
-    
     switch (true) {
         case snake[0].x < 0:
             snake[0].x = Game.GAMEWIDTH;
