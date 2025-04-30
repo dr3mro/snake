@@ -29,6 +29,12 @@ let currentFoodColor = "#32CD32"; // Default color
 // Add a variable to track lives
 let lives = 3; // Start with 3 lives
 
+// Add variables for special food
+let specialFoodX;
+let specialFoodY;
+let specialFoodActive = false;
+let specialFoodTimer;
+
 document.addEventListener("visibilitychange", () => {
     if(document.hidden){
         paused = true;
@@ -80,12 +86,18 @@ async function nextTick(){
             if(!paused){
                 clearBoard();
                 drawFood();
+                drawSpecialFood(); // Draw special food if active
                 moveDrawCheck();
             }
             checkPaused();
             Audio.check(paused, running);
             nextTick();
         }, tickSpeed);
+
+        // Randomly create special food with a small probability
+        if (!specialFoodActive && Math.random() < 0.01) {
+            createSpecialFood();
+        }
     
     }
     else{
@@ -119,12 +131,49 @@ function createFood(){
     currentFoodColor = colors[Math.floor(Math.random() * colors.length)];
 }
 
+function createSpecialFood() {
+    function randomFood(min, max) {
+        return Math.round((Math.random() * (max - min) + min) / Game.UNITSIZE) * Game.UNITSIZE;
+    }
+
+    let validPosition = false;
+
+    while (!validPosition) {
+        specialFoodX = randomFood(0, Game.GAMEWIDTH - Game.UNITSIZE);
+        specialFoodY = randomFood(0, Game.GAMEHEIGHT - Game.UNITSIZE);
+
+        // Check if the special food position overlaps with the snake's body or regular food
+        validPosition = !snake.some(segment => segment.x === specialFoodX && segment.y === specialFoodY) &&
+                        (specialFoodX !== foodX || specialFoodY !== foodY);
+    }
+
+    specialFoodActive = true;
+
+    // Set a timer to deactivate the special food after 10 seconds
+    specialFoodTimer = setTimeout(() => {
+        specialFoodActive = false;
+    }, 10000);
+}
+
 function drawFood(){
     Elements.CTX.fillStyle = currentFoodColor; // Use the current food color
     Elements.CTX.shadowBlur = 10; // Glow effect
     Elements.CTX.shadowColor = currentFoodColor;
     Elements.CTX.fillRect(foodX, foodY, Game.UNITSIZE, Game.UNITSIZE);
     Elements.CTX.shadowBlur = 0; // Reset shadow
+}
+
+function drawSpecialFood() {
+    if (specialFoodActive) {
+        const colors = ["#FF4500", "#FFD700", "#FF69B4", "#00CED1", "#7FFF00", "#DC143C"];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+        Elements.CTX.fillStyle = randomColor; // Set the random color for special food
+        Elements.CTX.shadowBlur = 10; // Glow effect
+        Elements.CTX.shadowColor = randomColor;
+        Elements.CTX.fillRect(specialFoodX, specialFoodY, Game.UNITSIZE, Game.UNITSIZE);
+        Elements.CTX.shadowBlur = 0; // Reset shadow
+    }
 }
 
 function moveSnake(){
@@ -140,8 +189,14 @@ function moveSnake(){
         Audio.playEatSound();
         createFood();
         tickSpeed = tickSpeed - 1;
-    }
-    else{
+    } else if (specialFoodActive && snake[0].x == specialFoodX && snake[0].y == specialFoodY) {
+        // Check if special food is eaten
+        lives += 1; // Add a life
+        drawLives(); // Update lives display
+        Audio.playEatSound();
+        specialFoodActive = false; // Deactivate special food
+        clearTimeout(specialFoodTimer); // Clear the timer
+    } else {
         snake.pop();
     }     
 }
