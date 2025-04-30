@@ -115,7 +115,7 @@ function createFood(){
     }
 
     // Change the food color only when new food is created
-    const colors = ["#32CD32", "#FF4500", "#FFD700", "#1E90FF", "#8A2BE2", "#FF69B4", "#00CED1", "#FFA500", "#7FFF00", "#DC143C"];
+    const colors = ["#32CD32", "#FF4500", "#FFD700", "#8A2BE2", "#FF69B4", "#00CED1", "#FFA500", "#7FFF00", "#DC143C"];
     currentFoodColor = colors[Math.floor(Math.random() * colors.length)];
 }
 
