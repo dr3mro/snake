@@ -229,7 +229,7 @@ function changeDirection(event){
     const goingDown = (yVelocity == Game.UNITSIZE && xVelocity == 0);
     const goingRight = (xVelocity == Game.UNITSIZE && yVelocity == 0);
     const goingLeft = (xVelocity == -Game.UNITSIZE && yVelocity == 0);
-
+    
     const movable = !paused && running;
 
     switch(true){
@@ -285,6 +285,8 @@ function checkPaused() {
 }
 
 function checkGameOver() {
+    if(paused) return;
+    
     switch (true) {
         case snake[0].x < 0:
             snake[0].x = Game.GAMEWIDTH;
