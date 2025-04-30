@@ -317,14 +317,6 @@ function showTakeCareMessage() {
     paused = true;
     pausedTextIsVisible = false;
 
-    // Display the "Take Care" message
-    Elements.CTX.fillStyle = "rgba(0, 0, 0, 0.7)"; // Darker overlay
-    Elements.CTX.fillRect(0, 0, Game.GAMEWIDTH, Game.GAMEHEIGHT);
-    Elements.CTX.font = "bold 40px 'Poppins', sans-serif"; // Modern font
-    Elements.CTX.fillStyle = "#FFD700"; // Gold color for text
-    Elements.CTX.textAlign = "center";
-    Elements.CTX.fillText("Take Care next time.", Game.GAMEWIDTH / 2, Game.GAMEHEIGHT / 2);
-
     // Add an event listener to resume the game on any key press
     function resumeGame(event) {
         paused = false;
