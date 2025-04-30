@@ -1,6 +1,8 @@
+@import url('https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts@latest/webfonts.css');
+
 /* Modernize the game visuals */
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nerd Font', sans-serif; /* Set default font to Nerd Font */
     background: linear-gradient(135deg, #1e3c72, #2a5298); /* Gradient background */
     color: #fff;
     text-align: center;
