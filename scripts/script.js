@@ -273,8 +273,13 @@ function changeDirection(event){
     //console.log(keyPressed);
 }
 
-function checkPaused(){
-    if(paused && running && !pausedTextIsVisible){
+function checkPaused() {
+    if (paused && running && !pausedTextIsVisible) {
+        // Prevent showing the pause message if the "Take Care" message is active
+        if (lives > 0 && pausedTextIsVisible === false) {
+            return;
+        }
+
         Elements.CTX.fillStyle = "rgba(0, 0, 0, 0.7)"; // Darker overlay
         Elements.CTX.fillRect(0, 0, Game.GAMEWIDTH, Game.GAMEHEIGHT);
         Elements.CTX.font = "bold 60px 'Poppins', sans-serif"; // Modern font
@@ -305,13 +310,35 @@ function checkGameOver() {
             lives -= 1; // Decrease lives
             drawLives(); // Update lives display
             if (lives > 0) {
-                resetSnakePosition(); // Reset snake position without losing speed or length
+                showTakeCareMessage(); // Show special pause message
             } else {
                 running = false; // End game if no lives left
                 displayGameOver();
             }
         }
     }
+}
+
+function showTakeCareMessage() {
+    paused = true;
+    pausedTextIsVisible = false;
+
+    // Display the "Take Care" message
+    Elements.CTX.fillStyle = "rgba(0, 0, 0, 0.7)"; // Darker overlay
+    Elements.CTX.fillRect(0, 0, Game.GAMEWIDTH, Game.GAMEHEIGHT);
+    Elements.CTX.font = "bold 40px 'Poppins', sans-serif"; // Modern font
+    Elements.CTX.fillStyle = "#FFD700"; // Gold color for text
+    Elements.CTX.textAlign = "center";
+    Elements.CTX.fillText("Take Care next time.", Game.GAMEWIDTH / 2, Game.GAMEHEIGHT / 2);
+
+    // Add an event listener to resume the game on any key press
+    function resumeGame(event) {
+        paused = false;
+        pausedTextIsVisible = false;
+        window.removeEventListener("keydown", resumeGame); // Remove the event listener after resuming
+    }
+
+    window.addEventListener("keydown", resumeGame);
 }
 
 function resetSnakePosition() {
