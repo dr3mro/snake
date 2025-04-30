@@ -230,24 +230,25 @@ function changeDirection(event){
     const goingRight = (xVelocity == Game.UNITSIZE && yVelocity == 0);
     const goingLeft = (xVelocity == -Game.UNITSIZE && yVelocity == 0);
 
+    const movable = !paused && running;
 
     switch(true){
-        case(!goingRight && !paused && (keyPressed == Game.LEFT || keyPressed == Game.KEY_A || event.key == "ArrowLeft")):
+        case(!goingRight && movable && (keyPressed == Game.LEFT || keyPressed == Game.KEY_A || event.key == "ArrowLeft")):
             xVelocity = -Game.UNITSIZE;
             yVelocity = 0;
             moveDrawCheck();
             break;
-        case(!goingDown && !paused && (keyPressed == Game.UP || keyPressed == Game.KEY_W || event.key == "ArrowUp")):
+        case(!goingDown && movable && (keyPressed == Game.UP || keyPressed == Game.KEY_W || event.key == "ArrowUp")):
             xVelocity = 0;
             yVelocity = -Game.UNITSIZE;
             moveDrawCheck();
             break;
-        case(!goingLeft && !paused &&(keyPressed ==  Game.RIGHT || keyPressed == Game.KEY_D || event.key == "ArrowRight")):
+        case(!goingLeft && movable &&(keyPressed ==  Game.RIGHT || keyPressed == Game.KEY_D || event.key == "ArrowRight")):
             xVelocity = Game.UNITSIZE;
             yVelocity = 0;
             moveDrawCheck();
             break;
-        case(!goingUp && !paused && (keyPressed == Game.DOWN || keyPressed == Game.KEY_S || event.key == "ArrowDown")):
+        case(!goingUp && movable && (keyPressed == Game.DOWN || keyPressed == Game.KEY_S || event.key == "ArrowDown")):
             xVelocity = 0;
             yVelocity = Game.UNITSIZE;
             moveDrawCheck();
@@ -258,8 +259,9 @@ function changeDirection(event){
                 return;
             }
             Audio.playClickSound();
-            pausedTextIsVisible = false;
             paused = !paused;
+            pausedTextIsVisible = false;
+            checkPaused();
             break;
         default:
             break;
@@ -269,11 +271,7 @@ function changeDirection(event){
 
 function checkPaused() {
     if (paused && running && !pausedTextIsVisible) {
-        // Prevent showing the pause message if the "Take Care" message is active
-        if (lives > 0 && pausedTextIsVisible === false) {
-            return;
-        }
-
+        // Ensure the pause message appears when the game is paused
         Elements.CTX.fillStyle = "rgba(0, 0, 0, 0.7)"; // Darker overlay
         Elements.CTX.fillRect(0, 0, Game.GAMEWIDTH, Game.GAMEHEIGHT);
         Elements.CTX.font = "bold 60px 'Poppins', sans-serif"; // Modern font
@@ -281,6 +279,8 @@ function checkPaused() {
         Elements.CTX.textAlign = "center";
         Elements.CTX.fillText("PAUSED", Game.GAMEWIDTH / 2, Game.GAMEHEIGHT / 2);
         pausedTextIsVisible = true;
+    } else if (!paused) {
+        pausedTextIsVisible = false; // Reset the flag when unpaused
     }
 }
 
