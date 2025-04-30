@@ -1,21 +1,20 @@
 {
-    "name": "Snake",
-    "short_name": "App",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#ffffff",
-    "icons": [
-      {
-        "src": "/icon192.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      },
-      {
-        "src": "/icon512.png",
-        "sizes": "512x512",
-        "type": "image/png"
-      }
-    ]
-  }
-  
+  "name": "Snake Game",
+  "short_name": "Snake",
+  "start_url": "/snake/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#1e3c72",
+  "icons": [
+    {
+      "src": "assets/images/snake192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/images/snake512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
