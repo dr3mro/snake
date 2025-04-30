@@ -157,7 +157,7 @@ function moveDrawCheck(){
     checkGameOver();
 }
 function changeDirection(event){
-    if ( ( !running && event.keyCode != Game.KEY_ENTER )|| (paused && event.keyCode != Game.SPACE) ) return; // Prevent direction change if the game is not running
+    if ( !running && event.keyCode != Game.KEY_ENTER ) return; // Prevent direction change if the game is not running
 
     const keyPressed = event.keyCode;
     //console.log(event.key);
@@ -168,22 +168,22 @@ function changeDirection(event){
 
 
     switch(true){
-        case(!goingRight && (keyPressed == Game.LEFT || keyPressed == Game.KEY_A || event.key == "ArrowLeft")):
+        case(!goingRight && !paused && (keyPressed == Game.LEFT || keyPressed == Game.KEY_A || event.key == "ArrowLeft")):
             xVelocity = -Game.UNITSIZE;
             yVelocity = 0;
             moveDrawCheck();
             break;
-        case(!goingDown && (keyPressed == Game.UP || keyPressed == Game.KEY_W || event.key == "ArrowUp")):
+        case(!goingDown && !paused && (keyPressed == Game.UP || keyPressed == Game.KEY_W || event.key == "ArrowUp")):
             xVelocity = 0;
             yVelocity = -Game.UNITSIZE;
             moveDrawCheck();
             break;
-        case(!goingLeft &&(keyPressed ==  Game.RIGHT || keyPressed == Game.KEY_D || event.key == "ArrowRight")):
+        case(!goingLeft && !paused &&(keyPressed ==  Game.RIGHT || keyPressed == Game.KEY_D || event.key == "ArrowRight")):
             xVelocity = Game.UNITSIZE;
             yVelocity = 0;
             moveDrawCheck();
             break;
-        case(!goingUp && (keyPressed == Game.DOWN || keyPressed == Game.KEY_S || event.key == "ArrowDown")):
+        case(!goingUp && !paused && (keyPressed == Game.DOWN || keyPressed == Game.KEY_S || event.key == "ArrowDown")):
             xVelocity = 0;
             yVelocity = Game.UNITSIZE;
             moveDrawCheck();
