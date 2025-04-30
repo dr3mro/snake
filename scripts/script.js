@@ -305,7 +305,7 @@ function checkGameOver() {
             lives -= 1; // Decrease lives
             drawLives(); // Update lives display
             if (lives > 0) {
-                resetSnake(); // Reset snake position and continue
+                resetSnakePosition(); // Reset snake position without losing speed or length
             } else {
                 running = false; // End game if no lives left
                 displayGameOver();
@@ -314,16 +314,26 @@ function checkGameOver() {
     }
 }
 
-function resetSnake() {
-    snake = [
-        { x: Game.UNITSIZE * 4, y: 0 },
-        { x: Game.UNITSIZE * 3, y: 0 },
-        { x: Game.UNITSIZE * 2, y: 0 },
-        { x: Game.UNITSIZE, y: 0 },
-        { x: 0, y: 0 },
-    ];
-    xVelocity = Game.UNITSIZE;
-    yVelocity = 0;
+function resetSnakePosition() {
+    // Pause the game temporarily
+    paused = true;
+    pausedTextIsVisible = false;
+
+    // Reset the snake's position to the starting point without altering its length or speed
+    const initialX = Game.UNITSIZE * 4;
+    const initialY = 0;
+    const xOffset = xVelocity;
+    const yOffset = yVelocity;
+
+    for (let i = 0; i < snake.length; i++) {
+        snake[i].x = initialX - i * xOffset;
+        snake[i].y = initialY - i * yOffset;
+    }
+
+    // Resume the game after a short delay
+    setTimeout(() => {
+        paused = false;
+    }, 1000); // Pause for 1 second
 }
 
 function drawLives() {
