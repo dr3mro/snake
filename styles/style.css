@@ -81,6 +81,9 @@ body {
     top: 5px;
     left: 20px;
     max-width: 8ch;
+    oveflow: hidden;
+    white-space: wrap;
+    text-flow: ellipsis;
     font-size: 24px;
     color: white;
     cursor: pointer;
