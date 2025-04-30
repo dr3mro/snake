@@ -175,6 +175,8 @@ function drawSpecialFood() {
 }
 
 function moveSnake() {
+    if (paused) return;
+    
     const head = {
         x: snake[0].x + xVelocity,
         y: snake[0].y + yVelocity
