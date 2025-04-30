@@ -213,3 +213,13 @@ button:active {
     margin: 10px;
     color: #FFD700; /* Gold color */
 }
+
+#lives {
+    position: absolute;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    color: #FFD700; /* Gold color */
+}

@@ -270,17 +270,9 @@ function drawLives() {
     const heart = "❤️"; // Heart symbol
     const livesText = heart.repeat(lives); // Repeat hearts based on remaining lives
     const livesElement = document.getElementById("lives");
-    if (!livesElement) {
-        const newLivesElement = document.createElement("div");
-        newLivesElement.id = "lives";
-        newLivesElement.style.position = "absolute";
-        newLivesElement.style.top = "10px";
-        newLivesElement.style.right = "10px";
-        newLivesElement.style.fontSize = "24px";
-        newLivesElement.style.color = "#FFD700"; // Gold color
-        document.body.appendChild(newLivesElement);
+    if (livesElement) {
+        livesElement.textContent = livesText; // Update the content of the existing element
     }
-    document.getElementById("lives").textContent = livesText;
 }
 
 function displayGameOver(){
