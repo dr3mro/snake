@@ -87,10 +87,6 @@ body {
     align-items: center;
     justify-content: center;
     transition: background 0.3s ease;
-    max-width: 8ch; /* Limit the width to 4 characters */
-    overflow: hidden; /* Hide any extra content */
-    white-space: wrap; /* Prevent wrapping */
-    text-overflow: ellipsis; /* Add ellipsis if content overflows */
 }
 
 /* Mobile-specific adjustments */

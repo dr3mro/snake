@@ -222,7 +222,6 @@ function moveDrawCheck(){
     checkGameOver();
 }
 function changeDirection(event){
-    if ( !running && event.keyCode != Game.KEY_ENTER ) return; // Prevent direction change if the game is not running
 
     const keyPressed = event.keyCode;
     //console.log(event.key);
