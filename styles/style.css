@@ -185,6 +185,7 @@ html, body {
     height: 100%;
 }
 
+/* Normalize arrow symbols for all platforms */
 button {
     font-family: 'Poppins', sans-serif;
     font-size: 18px;
@@ -196,6 +197,14 @@ button {
     color: #fff;
     cursor: pointer;
     transition: transform 0.2s, background 0.2s;
+    text-align: center;
+}
+
+button::before {
+    content: attr(data-arrow); /* Use data attributes for arrow symbols */
+    font-size: 24px; /* Ensure consistent size */
+    display: block;
+    margin-bottom: 5px;
 }
 
 button:hover {
