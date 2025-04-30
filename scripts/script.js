@@ -253,9 +253,6 @@ function changeDirection(event){
             yVelocity = Game.UNITSIZE;
             moveDrawCheck();
             break;
-        case (keyPressed == Game.KEY_ENTER):
-            resetGame();
-            break;
         case (keyPressed == Game.SPACE || event.key == "SPACE"):
             if(!running){
                 resetGame();
