@@ -209,6 +209,14 @@ button::before {
     margin-bottom: 5px;
 }
 
+button#leftBtn::before {
+    content: '\2190'; /* Unicode for left arrow */
+}
+
+button#rightBtn::before {
+    content: '\2192'; /* Unicode for right arrow */
+}
+
 button:hover {
     transform: scale(1.1);
     background: linear-gradient(135deg, #228B22, #006400); /* Darker green on hover */
