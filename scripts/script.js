@@ -26,6 +26,9 @@ let snake = [
 // Store the current food color globally
 let currentFoodColor = "#32CD32"; // Default color
 
+// Add a variable to track lives
+let lives = 3; // Start with 3 lives
+
 document.addEventListener("visibilitychange", () => {
     if(document.hidden){
         paused = true;
@@ -66,6 +69,7 @@ function gameStart(){
     scoreText.textContent = score;
     createFood();
     drawFood();
+    drawLives(); // Display initial lives
     nextTick();
 }
 
@@ -220,26 +224,63 @@ function checkPaused(){
         pausedTextIsVisible = true;
     }
 }
-function checkGameOver(){
-    switch(true){
-        case (snake[0].x < 0):
+
+function checkGameOver() {
+    switch (true) {
+        case snake[0].x < 0:
             snake[0].x = Game.GAMEWIDTH;
             break;
-        case (snake[0].x >= Game.GAMEWIDTH):
+        case snake[0].x >= Game.GAMEWIDTH:
             snake[0].x = 0;
             break;
-        case (snake[0].y < 0):
+        case snake[0].y < 0:
             snake[0].y = Game.GAMEHEIGHT;
             break;
-        case (snake[0].y >= Game.GAMEHEIGHT):
+        case snake[0].y >= Game.GAMEHEIGHT:
             snake[0].y = 0;
             break;
     }
-    for(let i = 1; i < snake.length; i+=1){
-        if(snake[i].x == snake[0].x && snake[i].y == snake[0].y){
-            running = false;
+    for (let i = 1; i < snake.length; i += 1) {
+        if (snake[i].x == snake[0].x && snake[i].y == snake[0].y) {
+            lives -= 1; // Decrease lives
+            drawLives(); // Update lives display
+            if (lives > 0) {
+                resetSnake(); // Reset snake position and continue
+            } else {
+                running = false; // End game if no lives left
+                displayGameOver();
+            }
         }
     }
+}
+
+function resetSnake() {
+    snake = [
+        { x: Game.UNITSIZE * 4, y: 0 },
+        { x: Game.UNITSIZE * 3, y: 0 },
+        { x: Game.UNITSIZE * 2, y: 0 },
+        { x: Game.UNITSIZE, y: 0 },
+        { x: 0, y: 0 },
+    ];
+    xVelocity = Game.UNITSIZE;
+    yVelocity = 0;
+}
+
+function drawLives() {
+    const heart = "❤️"; // Heart symbol
+    const livesText = heart.repeat(lives); // Repeat hearts based on remaining lives
+    const livesElement = document.getElementById("lives");
+    if (!livesElement) {
+        const newLivesElement = document.createElement("div");
+        newLivesElement.id = "lives";
+        newLivesElement.style.position = "absolute";
+        newLivesElement.style.top = "10px";
+        newLivesElement.style.right = "10px";
+        newLivesElement.style.fontSize = "24px";
+        newLivesElement.style.color = "#FFD700"; // Gold color
+        document.body.appendChild(newLivesElement);
+    }
+    document.getElementById("lives").textContent = livesText;
 }
 
 function displayGameOver(){
@@ -256,6 +297,7 @@ function resetGame(){
     paused = false;
     clearTimeout(ticker);
     score = 0;
+    lives = 3; // Reset lives
     xVelocity = Game.UNITSIZE;
     yVelocity = 0;
     snake = [
